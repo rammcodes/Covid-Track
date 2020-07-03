@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import District from './components/District/District'
+import MainLoader from './components/MainLoader/MainLoader'
+import Topbar from './components/Topbar/Topbar'
 import './App.scss'
 
 class App extends Component {
   state = {
     searchInput: '',
     finalSearch: '',
-    results: null,
+    data: null,
+    results: [],
   }
 
   componentDidMount() {
@@ -14,82 +18,53 @@ class App extends Component {
       .get('https://api.covid19india.org/zones.json')
       .then((res) => {
         this.setState({
-          results: res.data.zones,
+          data: res.data.zones,
         })
       })
       .catch((err) => console.log(err))
   }
 
+  onSearchInputChange = (e) => {
+    this.setState({ searchInput: e.target.value })
+  }
+
+  getResults = () => {
+    const { data, searchInput } = this.state
+    if (searchInput.length) {
+      let newResults = data.filter((item) =>
+        item.district.toLowerCase().includes(searchInput.toLowerCase())
+      )
+      console.log(newResults, 'nr')
+      this.setState({ results: newResults })
+    } else {
+      this.setState({
+        results: [],
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchInput !== this.state.searchInput) {
+      this.getResults()
+    }
+  }
+
   render() {
-    const { results } = this.state
+    const { searchInput, finalSearch, data, results } = this.state
 
     return (
       <div className="app">
-        <div className="topbar">
-          <div className="container">
-            <div className="search-cont">
-              <input
-                placeholder="Search for a District..."
-                type="text"
-                className="search-input"
-              />
-              <span className="search-icon-cont">
-                <img
-                  src="https://img.icons8.com/android/15/000000/search.png"
-                  alt="search-icon"
-                  className="search-icon"
-                />
-              </span>
-            </div>
-          </div>
-        </div>
+        <Topbar
+          searchInput={searchInput}
+          onSearchInputChange={this.onSearchInputChange}
+          results={results}
+        />
         <div className="main-data">
           <div className="container">
-            {results === null ? (
-              <div className="load-wrap">
-                <div class="lds-ring">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              </div>
+            {data === null ? (
+              <MainLoader />
             ) : (
-              results.map((item) => (
-                <div className="dist">
-                  <h3 className="name" style={{ background: `${item.zone}` }}>
-                    {item.district}
-                  </h3>
-                  <div className="details">
-                    <div className="sub-detail">
-                      <span className="title">Zone:</span>
-                      <b
-                        className="val-hl"
-                        style={{ background: `${item.zone}` }}
-                      >
-                        {item.zone}
-                      </b>
-                    </div>
-
-                    <div className="sub-detail">
-                      <span className="title">Code:</span>
-                      <b className="val">{item.districtcode}</b>
-                    </div>
-                    <div className="sub-detail">
-                      <span className="title">State:</span>
-                      <b className="val">{item.state}</b>
-                    </div>
-                    <div className="sub-detail">
-                      <span className="title">State Code:</span>
-                      <b className="val">{item.statecode}</b>
-                    </div>
-                    <div className="sub-detail">
-                      <span className="title">Last Updated:</span>
-                      <b className="val">{item.lastupdated}</b>
-                    </div>
-                  </div>
-                </div>
-              ))
+              data.map((item, idx) => <District key={idx} item={item} />)
             )}
           </div>
         </div>

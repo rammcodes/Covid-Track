@@ -12,31 +12,71 @@
       margin: auto;
       padding: 20px;
       .search-cont {
+        position: relative;
         width: 90%;
         margin: auto;
         max-width: 600px;
-        display: flex;
-        align-items: center;
         border: 1px solid rgb(182, 182, 182);
         border-radius: 5px;
         padding: 15px 0 15px 15px;
-        .search-input {
-          border-right: none;
-          border: none;
-          width: 90%;
-        }
-        .search-icon-cont {
-          width: 10%;
+        .main {
           display: flex;
           align-items: center;
-          justify-content: center;
+          .search-input {
+            border-right: none;
+            border: none;
+            width: 90%;
+          }
+          .search-icon-cont {
+            width: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+        .results {
+          position: absolute;
+          top: 105%;
+          width: 100%;
+          -webkit-box-shadow: 0px 4px 5px 3px rgba(0, 0, 0, 0.1);
+          -moz-box-shadow: 0px 4px 5px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 5px 3px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          overflow: hidden;
+          left: 0;
+          .result {
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .name {
+              font-size: 0.9rem;
+              color: grey;
+              font-weight: bold;
+            }
+            .zone {
+              background-color: green;
+              border-radius: 5px;
+              color: #fff;
+              font-size: 0.8rem;
+              color: #fff;
+              padding: 10px 15px;
+              font-weight: bold;
+            }
+            &:last-child {
+              border-bottom: none;
+            }
+          }
         }
       }
     }
   }
   .main-data {
     z-index: -1;
-    margin: 150px 0 0 0;
+    margin: 150px 0;
     .container {
       max-width: 1300px;
       margin: auto;
@@ -75,6 +115,7 @@
               color: #fff;
               margin: 3px 0 0 0;
               display: inline-block;
+              border-radius: 3px;
             }
           }
         }
