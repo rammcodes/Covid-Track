@@ -44,6 +44,9 @@ class App extends Component {
 
   filterData = () => {
     const { data, searchInput } = this.state
+    this.setState({
+      data: null,
+    })
     let newData = data.filter(
       (item) => item.district.toString() === searchInput.toString()
     )
@@ -60,7 +63,6 @@ class App extends Component {
       )
 
       newResults = newResults.filter((item, idx) => idx <= 5)
-      console.log(newResults, 'nr')
       this.setState({ results: newResults })
     } else {
       this.setState({

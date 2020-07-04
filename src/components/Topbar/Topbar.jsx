@@ -43,7 +43,10 @@ class Topbar extends Component {
                         searchInput.toLowerCase(),
                         `<span className="bl-txt">${searchInput}</span>`
                       )} */}
-                      {item.district}
+                      {item.district.replace(
+                        /Pu/g,
+                        "<span class='bl-txt'>Pu</span>"
+                      )}
                     </span>
                     <span
                       className="zone"
