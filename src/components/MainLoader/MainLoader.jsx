@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './MainLoader.scss';
 
 class MainLoader extends Component {
   state = {}

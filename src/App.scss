@@ -13,7 +13,7 @@
       padding: 20px;
       .search-cont {
         position: relative;
-        width: 90%;
+        width: 98%;
         margin: auto;
         max-width: 600px;
         border: 1px solid rgb(182, 182, 182);
@@ -86,11 +86,13 @@
     z-index: -1;
     margin: 150px 0;
     .container {
-      max-width: 1300px;
+      max-width: 1200px;
       margin: auto;
       display: grid;
-      grid-template-columns: 410px 410px 410px;
-      grid-gap: 35px;
+      grid-template-columns: 31% 31% 31%;
+      grid-column-gap: 3.5%;
+      grid-row-gap: 40px;
+      padding: 0 30px;
       .dist {
         -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
         -moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
@@ -132,45 +134,64 @@
   }
 }
 
-.load-wrap {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@media (max-width: 1100px) {
+  .app {
+    .main-data {
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 48% 48%;
+        grid-column-gap: 4%;
+        grid-row-gap: 40px;
+        padding: 0 30px;
+      }
+    }
+  }
 }
 
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid grey;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: grey transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
+@media (max-width: 800px) {
+  .app {
+    .main-data {
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        display: unset;
+        padding: 0 30px;
+        .dist {
+          width: 90%;
+          margin: auto;
+          margin-bottom: 40px;
+        }
+      }
+    }
   }
-  100% {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 600px) {
+  .app {
+    .topbar {
+      .container {
+        padding: 15px 10px;
+        .search-cont {
+          .main {
+            .search-input {
+              width: 85%;
+            }
+            .search-icon-cont {
+              width: 15%;
+            }
+          }
+        }
+      }
+    }
+    .main-data {
+      margin: 100px 0;
+      .container {
+        .dist {
+          margin-bottom: 30px;
+        }
+      }
+    }
   }
 }
