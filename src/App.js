@@ -16,7 +16,7 @@ class App extends Component {
       Mumbai: true,
       Chennai: true,
       Kolkata: true,
-      Kamle: true,
+      Pune: true,
     },
   }
 
@@ -62,6 +62,12 @@ class App extends Component {
       searchInput: val,
       finalSearch: true,
     })
+  }
+
+  onBlurInput = (e) => {
+    setTimeout(() => {
+      this.setState({ showDefaultResults: false })
+    }, 100)
   }
 
   filterData = () => {
@@ -138,6 +144,7 @@ class App extends Component {
           showDefaultResults={showDefaultResults}
           defaultResults={defaultResults}
           changeDefaultResultsShowcase={this.changeDefaultResultsShowcase}
+          onBlurInput={this.onBlurInput}
         />
         <div className="main-data">
           <div className="container">

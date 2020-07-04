@@ -33,6 +33,7 @@ class Topbar extends Component {
       showDefaultResults,
       defaultResults,
       changeDefaultResultsShowcase,
+      onBlurInput,
     } = this.props
 
     return (
@@ -49,7 +50,7 @@ class Topbar extends Component {
                 onFocus={() => {
                   changeDefaultResultsShowcase(true)
                 }}
-                // onBlur={() => this.setState({ showDefaultResults: false })}
+                onBlur={onBlurInput}
               />
               <span className="search-icon-cont">
                 <img
@@ -66,9 +67,8 @@ class Topbar extends Component {
                   .map((dist, idx) => (
                     <div
                       key={idx}
-                      className="result sex"
+                      className="result"
                       onClick={() => {
-                        console.log('item', dist)
                         onResultClick(dist.district)
                       }}
                     >
