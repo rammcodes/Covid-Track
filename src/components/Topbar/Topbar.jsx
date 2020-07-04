@@ -29,6 +29,10 @@ class Topbar extends Component {
       results,
       finalSearch,
       onResultClick,
+      data,
+      showDefaultResults,
+      defaultResults,
+      changeDefaultResultsShowcase,
     } = this.props
 
     return (
@@ -42,6 +46,10 @@ class Topbar extends Component {
                 className="search-input"
                 value={searchInput}
                 onChange={onSearchInputChange}
+                onFocus={() => {
+                  changeDefaultResultsShowcase(true)
+                }}
+                // onBlur={() => this.setState({ showDefaultResults: false })}
               />
               <span className="search-icon-cont">
                 <img
@@ -51,6 +59,30 @@ class Topbar extends Component {
                 />
               </span>
             </div>
+            {!searchInput.length && showDefaultResults ? (
+              <div className="results">
+                {data
+                  .filter((item, idx) => defaultResults[item.district])
+                  .map((dist, idx) => (
+                    <div
+                      key={idx}
+                      className="result sex"
+                      onClick={() => {
+                        console.log('item', dist)
+                        onResultClick(dist.district)
+                      }}
+                    >
+                      {this.getHighlightedText(dist.district, searchInput)}
+                      <span
+                        className="zone"
+                        style={{ background: `${dist.zone}` }}
+                      >
+                        {dist.zone}
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            ) : null}
             {finalSearch ? null : results.length ? (
               <div className="results">
                 {results.map((item, idx) => (

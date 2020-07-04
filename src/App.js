@@ -11,6 +11,13 @@ class App extends Component {
     finalSearch: false,
     data: null,
     results: [],
+    showDefaultResults: false,
+    defaultResults: {
+      Mumbai: true,
+      Chennai: true,
+      Kolkata: true,
+      Kamle: true,
+    },
   }
 
   componentDidMount() {
@@ -31,11 +38,26 @@ class App extends Component {
       .catch((err) => console.log(err))
   }
 
+  changeDefaultResultsShowcase = (val) => {
+    this.setState({
+      showDefaultResults: val,
+    })
+  }
+
   onSearchInputChange = (e) => {
-    this.setState({ searchInput: e.target.value, finalSearch: false })
+    const { data } = this.state
+
+    if (data) {
+      this.setState({
+        searchInput: e.target.value,
+        finalSearch: false,
+        showDefaultResults: false,
+      })
+    }
   }
 
   onResultClick = (val) => {
+    console.log(val, 'val')
     this.setState({
       searchInput: val,
       finalSearch: true,
@@ -88,13 +110,21 @@ class App extends Component {
     this.setState({
       searchInput: '',
       finalSearch: false,
-      results: []
+      results: [],
+      showDefaultResults: false,
     })
     this.getFreshData()
   }
 
   render() {
-    const { searchInput, finalSearch, data, results } = this.state
+    const {
+      searchInput,
+      finalSearch,
+      data,
+      results,
+      showDefaultResults,
+      defaultResults,
+    } = this.state
 
     return (
       <div className="app">
@@ -104,6 +134,10 @@ class App extends Component {
           results={results}
           finalSearch={finalSearch}
           onResultClick={this.onResultClick}
+          data={data}
+          showDefaultResults={showDefaultResults}
+          defaultResults={defaultResults}
+          changeDefaultResultsShowcase={this.changeDefaultResultsShowcase}
         />
         <div className="main-data">
           <div className="container">
@@ -116,7 +150,9 @@ class App extends Component {
         </div>
         {finalSearch ? (
           <div className="reset">
-            <button onClick={this.onResetClick} className="reset-btn">Reset</button>
+            <button onClick={this.onResetClick} className="reset-btn">
+              Reset
+            </button>
           </div>
         ) : null}
       </div>
