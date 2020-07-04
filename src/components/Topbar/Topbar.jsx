@@ -2,6 +2,28 @@ import React, { Component } from 'react'
 
 class Topbar extends Component {
   state = {}
+
+  getHighlightedText = (text, highlight) => {
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'))
+    return (
+      <span className="name">
+        {' '}
+        {parts.map((part, i) => (
+          <span
+            key={i}
+            className={
+              part.toLowerCase() === highlight.toLowerCase()
+                ? 'bl-txt'
+                : {}
+            }
+          >
+            {part}
+          </span>
+        ))}{' '}
+      </span>
+    )
+  }
+
   render() {
     const {
       searchInput,
@@ -38,16 +60,7 @@ class Topbar extends Component {
                     className="result"
                     onClick={() => onResultClick(item.district)}
                   >
-                    <span className="name">
-                      {/* {item.district.replace(
-                        searchInput.toLowerCase(),
-                        `<span className="bl-txt">${searchInput}</span>`
-                      )} */}
-                      {item.district.replace(
-                        /Pu/g,
-                        "<span class='bl-txt'>Pu</span>"
-                      )}
-                    </span>
+                    {this.getHighlightedText(item.district, searchInput)}
                     <span
                       className="zone"
                       style={{ background: `${item.zone}` }}
