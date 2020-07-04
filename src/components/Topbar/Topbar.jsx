@@ -3,7 +3,13 @@ import React, { Component } from 'react'
 class Topbar extends Component {
   state = {}
   render() {
-    const { searchInput, onSearchInputChange, results } = this.props
+    const {
+      searchInput,
+      onSearchInputChange,
+      results,
+      finalSearch,
+      onResultClick,
+    } = this.props
     return (
       <div className="topbar">
         <div className="container">
@@ -24,11 +30,21 @@ class Topbar extends Component {
                 />
               </span>
             </div>
-            {results.length ? (
+            {finalSearch ? null : results.length ? (
               <div className="results">
                 {results.map((item, idx) => (
-                  <div key={idx} className="result">
-                    <span className="name">{item.district}</span>
+                  <div
+                    key={idx}
+                    className="result"
+                    onClick={() => onResultClick(item.district)}
+                  >
+                    <span className="name">
+                      {/* {item.district.replace(
+                        searchInput.toLowerCase(),
+                        `<span className="bl-txt">${searchInput}</span>`
+                      )} */}
+                      {item.district}
+                    </span>
                     <span
                       className="zone"
                       style={{ background: `${item.zone}` }}

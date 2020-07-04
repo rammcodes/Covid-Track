@@ -8,7 +8,7 @@ import './App.scss'
 class App extends Component {
   state = {
     searchInput: '',
-    finalSearch: '',
+    finalSearch: false,
     data: null,
     results: [],
   }
@@ -25,7 +25,14 @@ class App extends Component {
   }
 
   onSearchInputChange = (e) => {
-    this.setState({ searchInput: e.target.value })
+    this.setState({ searchInput: e.target.value, finalSearch: false })
+  }
+
+  onResultClick = (val) => {
+    this.setState({
+      searchInput: val,
+      finalSearch: true,
+    })
   }
 
   getResults = () => {
@@ -34,6 +41,8 @@ class App extends Component {
       let newResults = data.filter((item) =>
         item.district.toLowerCase().includes(searchInput.toLowerCase())
       )
+
+      newResults = newResults.filter((item, idx) => idx <= 5)
       console.log(newResults, 'nr')
       this.setState({ results: newResults })
     } else {
@@ -58,6 +67,8 @@ class App extends Component {
           searchInput={searchInput}
           onSearchInputChange={this.onSearchInputChange}
           results={results}
+          finalSearch={finalSearch}
+          onResultClick={this.onResultClick}
         />
         <div className="main-data">
           <div className="container">

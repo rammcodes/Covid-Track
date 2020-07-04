@@ -56,6 +56,9 @@
               font-size: 0.9rem;
               color: grey;
               font-weight: bold;
+              .bl-txt {
+                color: black;
+              }
             }
             .zone {
               background-color: green;
@@ -65,9 +68,14 @@
               color: #fff;
               padding: 10px 15px;
               font-weight: bold;
+              min-width: 80px;
+              text-align: center;
             }
             &:last-child {
               border-bottom: none;
+            }
+            &:hover {
+              background: rgb(246, 246, 246);
             }
           }
         }
