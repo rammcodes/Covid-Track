@@ -84,6 +84,15 @@ class App extends Component {
     }
   }
 
+  onResetClick = () => {
+    this.setState({
+      searchInput: '',
+      finalSearch: false,
+      results: []
+    })
+    this.getFreshData()
+  }
+
   render() {
     const { searchInput, finalSearch, data, results } = this.state
 
@@ -105,6 +114,11 @@ class App extends Component {
             )}
           </div>
         </div>
+        {finalSearch ? (
+          <div className="reset">
+            <button onClick={this.onResetClick} className="reset-btn">Reset</button>
+          </div>
+        ) : null}
       </div>
     )
   }

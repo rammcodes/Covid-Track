@@ -12,9 +12,7 @@ class Topbar extends Component {
           <span
             key={i}
             className={
-              part.toLowerCase() === highlight.toLowerCase()
-                ? 'bl-txt'
-                : {}
+              part.toLowerCase() === highlight.toLowerCase() ? 'bl-txt' : {}
             }
           >
             {part}
@@ -32,6 +30,7 @@ class Topbar extends Component {
       finalSearch,
       onResultClick,
     } = this.props
+
     return (
       <div className="topbar">
         <div className="container">
@@ -69,6 +68,14 @@ class Topbar extends Component {
                     </span>
                   </div>
                 ))}
+              </div>
+            ) : searchInput.length ? (
+              <div className="results">
+                <img
+                  style={{ objectFit: 'cover', width: '100%' }}
+                  alt="no-result"
+                  src={require('../../assets/empty.png')}
+                />
               </div>
             ) : null}
           </div>
