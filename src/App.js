@@ -14,6 +14,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getFreshData()
+  }
+
+  getFreshData = () => {
+    this.setState({
+      data: null,
+    })
     axios
       .get('https://api.covid19india.org/zones.json')
       .then((res) => {
@@ -32,6 +39,16 @@ class App extends Component {
     this.setState({
       searchInput: val,
       finalSearch: true,
+    })
+  }
+
+  filterData = () => {
+    const { data, searchInput } = this.state
+    let newData = data.filter(
+      (item) => item.district.toString() === searchInput.toString()
+    )
+    this.setState({
+      data: newData,
     })
   }
 
@@ -55,6 +72,13 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchInput !== this.state.searchInput) {
       this.getResults()
+    }
+    if (prevState.finalSearch !== this.state.finalSearch) {
+      if (this.state.finalSearch) {
+        this.filterData()
+      } else {
+        this.getFreshData()
+      }
     }
   }
 
