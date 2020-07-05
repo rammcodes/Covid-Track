@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   getFreshData = () => {
+    window.scrollTo(0, 0)
     this.setState({
       data: null,
     })
@@ -57,6 +58,7 @@ class App extends Component {
   }
 
   onResultClick = (val) => {
+    window.scrollTo(0, 0)
     this.setState({
       searchInput: val,
       finalSearch: true,
@@ -149,7 +151,7 @@ class App extends Component {
           <div className="showcase-info">
             <div className="container">
               <h2 className="main">
-                Showing {data.length > 1 ? "Results" : "Result"} for{' '}
+                Showing {data.length > 1 ? 'Results' : 'Result'} for{' '}
                 {data.length > 1 ? (
                   <span className="show-hl"> "All Districts" </span>
                 ) : (
