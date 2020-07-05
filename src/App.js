@@ -57,7 +57,6 @@ class App extends Component {
   }
 
   onResultClick = (val) => {
-    console.log(val, 'val')
     this.setState({
       searchInput: val,
       finalSearch: true,
@@ -146,6 +145,20 @@ class App extends Component {
           changeDefaultResultsShowcase={this.changeDefaultResultsShowcase}
           onBlurInput={this.onBlurInput}
         />
+        {data ? (
+          <div className="showcase-info">
+            <div className="container">
+              <h2 className="main">
+                Showing {data.length > 1 ? "Results" : "Result"} for{' '}
+                {data.length > 1 ? (
+                  <span className="show-hl"> All Districts </span>
+                ) : (
+                  <span className="show-hl"> {data[0].district} </span>
+                )}
+              </h2>
+            </div>
+          </div>
+        ) : null}
         <div className="main-data">
           <div className="container">
             {data === null ? (

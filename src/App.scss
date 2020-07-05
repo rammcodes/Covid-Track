@@ -82,9 +82,24 @@
       }
     }
   }
+  .showcase-info {
+    margin: 150px 0 0 0;
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 30px;
+      .main {
+        color: grey;
+        line-height: 30px;
+        .show-hl {
+          color: #333;
+        }
+      }
+    }
+  }
   .main-data {
     z-index: -1;
-    margin: 150px 0;
+    margin: 80px 0 150px 0;
     .container {
       max-width: 1200px;
       margin: auto;
@@ -212,8 +227,18 @@
         }
       }
     }
+
+    .showcase-info {
+      margin: 120px 0 0 0;
+      .container {
+        .main {
+          line-height: 35px;
+        }
+      }
+    }
+
     .main-data {
-      margin: 100px 0;
+      margin: 40px 0;
       .container {
         .dist {
           margin-bottom: 30px;
