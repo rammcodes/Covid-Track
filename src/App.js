@@ -151,9 +151,9 @@ class App extends Component {
               <h2 className="main">
                 Showing {data.length > 1 ? "Results" : "Result"} for{' '}
                 {data.length > 1 ? (
-                  <span className="show-hl"> All Districts </span>
+                  <span className="show-hl"> "All Districts" </span>
                 ) : (
-                  <span className="show-hl"> {data[0].district} </span>
+                  <span className="show-hl"> "{data[0].district}" </span>
                 )}
               </h2>
             </div>
