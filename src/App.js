@@ -18,6 +18,7 @@ class App extends Component {
       Chennai: true,
       Kolkata: true,
       Pune: true,
+      Hyderabad: true
     },
   }
 
